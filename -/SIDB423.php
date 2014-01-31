@@ -143,7 +143,7 @@ class SIDB {
  **************************************************************************/
 class SIDB_PDO_MySQL extends SIDB {
 	var $api = 'PDO/MySQL';
-	var $pdo = null; // PDO
+	var $pdo = null; // :PDO
 	
 	function set_error() {
 		list($e, $errno, $error) = $this->pdo->errorInfo();
