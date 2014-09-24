@@ -33,12 +33,19 @@ define('SIDB_API_MYSQL', 		'SIDB_MySQL');		// deprecated
  Attempts to pick the best available (or requested) API.
  **************************************************************************/
 function SIDB($database='', $username='', $password='', $server='localhost', $api=null) { // :SIDB 
-	if ($api==null || !class_exists($api)) {
-		if (extension_loaded('pdo_mysql')) 			$api = SIDB_API_PDO_MYSQL;
-		else if (extension_loaded('mysqli')) 		$api = SIDB_API_MYSQLI;
-		else if (function_exists('mysql_connect')) 	$api = SIDB_API_MYSQL;
-		else $api = SIDB_API_ABSTRACT;
+	if ($api==null) {
+		if (extension_loaded('pdo_mysql') && version_compare(PHP_VERSION, '5.1.0')>=0) {
+			$api = SIDB_API_PDO_MYSQL;
+		}
+		else if (extension_loaded('mysqli')) {
+			$api = SIDB_API_MYSQLI;
+		}
+		else if (function_exists('mysql_connect')) {
+			$api = SIDB_API_MYSQL;
+		}
 	}
+	if (!class_exists($api)) $api = SIDB_API_ABSTRACT;
+	
 	$db = new $api;
 	$db->connect($database, $username, $password, $server);
 	return $db;
@@ -139,167 +146,10 @@ class SIDB {
 }
 
 /**************************************************************************
- PDO/MySQL implementation
+ Moved to external file to prevent PHP 4.x from shitting itself. Sigh.
  **************************************************************************/
-class SIDB_PDO_MySQL extends SIDB {
-	var $api = 'PDO/MySQL';
-	var $pdo = null; // :PDO
-	
-	function set_error() {
-		list($e, $errno, $error) = $this->pdo->errorInfo();
-		$this->error = "{$this->api} Error ({$errno}): {$error}".' (SQL:'.$this->sql.')';
-	}
-	function connect($database='', $username='', $password='', $server='localhost') {
-		$server = $this->parse_server($server);
-		
-		$dsn = 'mysql:';
-		if ($server['socket']) {
-			$dsn .= "unix_socket={$server['socket']};";
-		}
-		else {
-			$dsn .= "host={$server['host']};";
-			if ($server['port']) $dsn .= "port={$server['port']};";
-		}
-		$dsn .= "dbname={$database};";
-			
-		try {
-			$this->pdo = new PDO($dsn, $username, $password);
-			$this->is_connected = true;
-		}
-		catch (PDOException $e) {
-			$this->error = $this->api.' Error ('.$e->getCode().'): '.$e->getMessage();
-		}
-	}
-	function close() {
-		$this->pdo = null;
-		$this->is_connected = false;
-		$this->error = false;
-	}
-	function quote($str) {
-		if (!$this->is_connected) return "''";
-		return $this->pdo->quote($str);
-	}
-	function query($sql) {
-		if (!$this->is_connected) return false;
-		
-		$this->error = false;
-		$this->sql = $sql;
-		
-		$this->result = $this->pdo->query($sql);
-		if ($this->result===false) $this->set_error();
-		
-		return !$this->error;
-	}
-	function rows() {
-		$rows = array();
-
-		if ($this->result!==false)
-		{
-			while ($aRow = $this->result->fetch())
-			{
-				$row = array();
-				foreach ($aRow as $key => $value)
-				{
-					if (is_int($key)) continue;
-					$row[$key] = $this->strip_slashes($value);
-				}
-				$rows[] = $row;
-			}
-			// TODO: should I also do this on close?
-			$this->result->closeCursor();
-		}
-		return $rows;
-	}
-	function affected_rows() {
-		return $this->result->rowCount();
-	}
-	function insert_id() {
-		return $this->pdo->lastInsertId();
-	}
-	function client_version() {
-		if (!$this->is_connected) return '0.0.0';
-		return $this->pdo->getAttribute(PDO::ATTR_CLIENT_VERSION);
-	}
-	function server_version() {
-		if (!$this->is_connected) return '0.0.0';
-		return $this->pdo->getAttribute(PDO::ATTR_SERVER_VERSION);
-	}
-}
-
-/**************************************************************************
- MySQL Improved implementation
- **************************************************************************/
-class SIDB_MySQLi extends SIDB {
-	var $api 	= 'MySQL Improved';
-	var $mysqli	= null; // :mysqli
-	
-	function set_error() {
-		$this->error = $this->api.' Error ('.$this->mysqli->errno.'): '.$this->mysqli->error.' (SQL:'.$this->sql.')';
-	}
-	function connect($database='', $username='', $password='', $server='localhost') {
-		$server = $this->parse_server($server);
-	
-		if (($this->mysqli = @mysqli_connect($server['host'], $username, $password, $database, $server['port'], $server['socket']))!==false) {
-			$this->is_connected = true;
-		}
-		else {
-			$this->error = $this->api.' Error ('.mysqli_connect_errno().'): '.mysqli_connect_error();
-		}
-	}
-	function close() {
-		if (!$this->is_connected) return;
-	
-		$this->mysqli->close();
-		$this->mysqli = null;
-		$this->is_connected = false;
-		$this->error = false;
-	}
-	function quote($str) {
-		if (!$this->is_connected) return "''";
-		return "'".$this->mysqli->real_escape_string($str)."'";
-	}
-	function query($sql) {
-		if (!$this->is_connected) return false;
-	
-		$this->error = false;
-		$this->sql = $sql;
-	
-		$this->result = $this->mysqli->query($sql);
-		if ($this->result===false) $this->set_error();
-		
-		return !$this->error;
-	}
-	function rows() {
-		$rows = array();
-
-		if ($this->result!==false)
-		{
-			while ($row = $this->result->fetch_array(MYSQLI_ASSOC))
-			{
-				foreach ($row as $key => $value)
-				{
-					$row[$key] = $this->strip_slashes($value);
-				}
-				$rows[] = $row;
-			}
-			$this->result->free();
-		}
-		return $rows;
-	}
-	function affected_rows() {
-		return $this->mysqli->affected_rows;
-	}
-	function insert_id() {
-		return $this->mysqli->insert_id;
-	}
-	function client_version() {
-		if (!$this->is_connected) return '0.0.0';
-		return $this->mysqli->client_info;
-	}
-	function server_version() {
-		if (!$this->is_connected) return '0.0.0';
-		return $this->mysqli->server_info;
-	}
+if (version_compare(PHP_VERSION, '5.0.0')>=0) {
+	include('SIDB5.php');
 }
 
 /**************************************************************************
