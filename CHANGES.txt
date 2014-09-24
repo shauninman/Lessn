@@ -1,3 +1,7 @@
+1.1.1
+- added "Updating to 1.1.1 from 1.1" to README.txt
+- improved PHP 4.x compatibility
+
 1.1
 - added "Updating to 1.1 from 1.0.7" to README.txt
 - added SIDB to migrate away from the deprecated mysql_* functions

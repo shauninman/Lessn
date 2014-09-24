@@ -73,6 +73,15 @@ Updating to 1.1 from 1.0.7
 3. Replace /index.php with the updated version in this 
    archive (minding any changes you might have made, diff
    before replacing if necessary).
+   
+-----------------------------------------------------------
+
+Updating to 1.1.1 from 1.1
+
+1. Replace /-/SIDB423.php with the updated version in this
+   archive.
+2. Upload /-/SIDB5.php to your server.
+
 
 -----------------------------------------------------------
 Lessn is offered as-is, sans support and without warranty.
