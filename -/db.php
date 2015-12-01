@@ -1,7 +1,7 @@
 <?php
 // no need to edit this file, see config.php
 
-error_reporting(0);
+//error_reporting(0);
 
 // connect (and install if necessary)
 $db = SIDB(DB_NAME, DB_USERNAME, DB_PASSWORD, DB_SERVER);
