@@ -27,7 +27,7 @@ $list = $list->get_shortcuts();
 		?>
 		<li>
 			<span style="display:inline;"><?php echo $key; ?></span>
-			<input type="text" id="url" value="<?php echo str_replace( 'index.php', $key, LESSN_URL ); ?>"
+			<input type="text" id="url" value="<?php echo str_replace( 'index.php', base_convert($key, 10, 36), LESSN_URL ); ?>"
 				onclick="this.focus();this.select();" readonly="readonly" />
 			<a href="<?php echo $url[ 'url' ]; ?>"><?php echo $link; ?></a>
 		</li>
