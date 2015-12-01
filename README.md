@@ -14,9 +14,10 @@
    site and rename to a single character. 
    Example: http://doma.in/x/
 
-3. Visit http://doma.in/x/-/ to Lessn a new url and grab
-   the bookmarklets (the required database table is created 
-   automatically the first time you visit Lessn).
+3. Visit http://doma.in/x/ to see all Lessn urls or jump to 
+   Lessn a new url and grab the bookmarklets (the required 
+   database table is created automatically the first time 
+   you visit Lessn).
 
 ### NOTE:
 
@@ -26,4 +27,4 @@
 
 # Other Notes
 Lessn is offered as-is, sans support and without warranty.
-Copyright © 2009 Shaun Inman http://shauninman.com/
+Copyright © 2009 - 2015 Shaun Inman http://shauninman.com/
