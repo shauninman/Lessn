@@ -6,7 +6,7 @@
  * @version 2015-12-01
  */
 
-require_once LESSN_ROOT . '/-/config.php';
+require_once LESSN_ROOT . '/config.php';
 
 /**
  * Class LessnListShortcut

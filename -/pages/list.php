@@ -6,8 +6,7 @@
  * @version 2015-12-01
  */
 
-require_once LESSN_ROOT . '/-/stubs/header.php';
-
+require_once LESSN_ROOT . '/stubs/header.php';
 require_once 'LessnListShortcut.php';
 
 $list = new LessnListShortcut();
@@ -16,9 +15,9 @@ $list = $list->get_shortcuts();
 <h2>List of shortcuts <a href="<?php echo str_replace( 'index.php', '-/', LESSN_URL ) ?>">... or, new one.</a></h2>
 <ul>
 	<?php
+	$length = 100;
 	foreach ( $list as $id => $url ) {
 		$key  = (int) $url[ 'id' ];
-		$length = 100;
 		$link = htmlspecialchars( $url[ 'url' ] );
 		if ( $length < strlen( $url[ 'url' ] ) ) {
 			$link = substr( $link, 0, $length ) . '...';
@@ -36,4 +35,4 @@ $list = $list->get_shortcuts();
 	?>
 </ul>
 <?php
-require_once LESSN_ROOT . '/-/stubs/footer.php';
+require_once LESSN_ROOT . '/stubs/footer.php';
