@@ -1,7 +1,7 @@
 # Lessn is an extremely simple, personal url shortener 
   written in PHP with MySQL and mod_rewrite.
 
-[Lessn](/assets/lessn.png)
+![Lessn](/assets/lessn.png)
  
 ## Installation
 
