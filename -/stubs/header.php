@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <title>Lessn</title>
-<meta name="generator" content="Lessn <?php echo LESSN_VERSION;?> (Shaun Inman&#8217;s fingertips)" /> 
+<meta name="generator" content="Lessn <?php echo LESSN_VERSION;?> (Shaun Inman&#8217;s fingertips)" />
 <style>
 body
 {
@@ -33,7 +33,7 @@ a,button
 	text-transform: uppercase;
 	letter-spacing: 1px;
 	vertical-align: middle;
-	
+
 	color: #fff;
 	background-color: #333;
 }

@@ -11,7 +11,7 @@ if (isset($_GET['token']))
 	if ($db->query('SELECT * FROM `'.DB_PREFIX.'urls` WHERE id='.base_convert($token, 36, 10).' LIMIT 1')) {
 		if ($rows = $db->rows()) {
 			$row = $rows[0];
-			
+
 			header($_SERVER['SERVER_PROTOCOL'].' 301 Moved Permanently');
 			header('Location:'.stripslashes($row['url']));
 			exit();

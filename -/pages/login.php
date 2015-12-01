@@ -7,4 +7,4 @@
 <script>
 document.getElementById('username').focus();
 </script>
-<?php include('stubs/footer.php'); ?>
+<?php include('stubs/footer.php');
