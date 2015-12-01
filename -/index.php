@@ -3,21 +3,7 @@
 include('config.php');
 include('SIDB423.php');
 include('db.php');
-
-define('LESSN_VERSION',	'1.1.1');
-
-define('LESSN_DOMAIN', 	preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']));
-define('LESSN_URL', 	str_replace('-/index.php', '', 'http://'.LESSN_DOMAIN.$_SERVER['PHP_SELF']));
-
-define('COOKIE_NAME', 	DB_PREFIX.'auth');
-define('COOKIE_VALUE',	md5(USERNAME.PASSWORD.COOKIE_SALT));
-define('COOKIE_DOMAIN', '.'.LESSN_DOMAIN);
-
-if (!defined('API_SALT')) define('API_SALT', 'L35sm4K35M0U7hSAP1'); // added in 1.0.5
-define('API_KEY', md5(USERNAME.PASSWORD.API_SALT));
-
-define('NOW', 		time());
-define('YEAR',		365 * 24 * 60 * 60);
+require_once 'const.php';
 
 // handle login
 if (isset($_POST['username']))
@@ -73,24 +59,24 @@ if (isset($_GET['url']) && !empty($_GET['url']))
 		}
 	}
 	$new_url = LESSN_URL.base_convert($id, 10, 36);
-	
+
 	if (isset($_GET['tweet']))
 	{
 		$_GET['redirect'] = 'http://twitter.com/?status=%l';
 	}
-	
+
 	if (isset($_GET['redirect']))
 	{
 		header('Location:'.str_replace('%l', urlencode($new_url), $_GET['redirect']));
 		exit();
 	}
-	
+
 	if (isset($_GET['api']))
 	{
 		echo $new_url;
 		exit();
 	}
-	
+
 	include('pages/done.php');
 }
 else

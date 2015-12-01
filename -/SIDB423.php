@@ -1,6 +1,6 @@
 <?php
 /**************************************************************************
- SIDB aims to be a simple PHP 4.2.3-compatible (don't ask) path forward for 
+ SIDB aims to be a simple PHP 4.2.3-compatible (don't ask) path forward for
  MySQL. It will use PDO if available, falling back on mysqli_* functions,
  before trying the deprecated mysql_* functions, as a last resort.
  --------------------------------------------------------------------------
@@ -20,7 +20,7 @@
 
  $db->query("INSERT ...");
  $id = $db->insert_id();
- 
+
  $db->quote($unsafe); // quotes and escapes, used automatically by prepare()
  **************************************************************************/
 define('SIDB_API_ABSTRACT', 	'SIDB');
@@ -32,7 +32,7 @@ define('SIDB_API_MYSQL', 		'SIDB_MySQL');		// deprecated
  SIDB()
  Attempts to pick the best available (or requested) API.
  **************************************************************************/
-function SIDB($database='', $username='', $password='', $server='localhost', $api=null) { // :SIDB 
+function SIDB($database='', $username='', $password='', $server='localhost', $api=null) { // :SIDB
 	if ($api==null) {
 		if (extension_loaded('pdo_mysql') && version_compare(PHP_VERSION, '5.1.0')>=0) {
 			$api = SIDB_API_PDO_MYSQL;
@@ -45,7 +45,7 @@ function SIDB($database='', $username='', $password='', $server='localhost', $ap
 		}
 	}
 	if (!class_exists($api)) $api = SIDB_API_ABSTRACT;
-	
+
 	$db = new $api;
 	$db->connect($database, $username, $password, $server);
 	return $db;
@@ -56,19 +56,19 @@ function SIDB($database='', $username='', $password='', $server='localhost', $ap
  Defines an interface for all SIDB implementations.
  **************************************************************************/
 class SIDB {
-	var $api 			= 'Abstract SIDB'; 	// :string 
+	var $api 			= 'Abstract SIDB'; 	// :string
 	var $error			= false; 			// :string or false
 	var $is_connected	= false; 			// :boolean
 	var $result			= false;			// :varies by API or false
 	var $sql			= ''; 				// :string, the most recent sql query
-	
+
 	// use to report unimplemented abstract methods
 	function fatal_error($method) {
 		die('Fatal Error: '.get_class($this).'->'.$method.'() implementation missing');
 	}
 
 	// final methods
-	function parse_server($server) { // :array 
+	function parse_server($server) { // :array
 		// eg. localhost:3306
 		// or. localhost:/path/to/mysql.socket
 		$result = array(
@@ -79,7 +79,7 @@ class SIDB {
 
 		$parts = explode(':', $server);
 		$result['host'] = $parts[0];
-	
+
 		if (isset($parts[1])) {
 			if (preg_match('/^[0-9]+$/', $parts[1])) {
 				$result['port'] = $parts[1];
@@ -90,7 +90,7 @@ class SIDB {
 		}
 		return $result;
 	}
-	function prepare($sql /* ... */ ) { // :string 
+	function prepare($sql /* ... */ ) { // :string
 		$args = func_get_args();
 		if (count($args) > 1)
 		{
@@ -104,14 +104,14 @@ class SIDB {
 		}
 		return $sql;
 	}
-	function strip_slashes($str) { // :string 
+	function strip_slashes($str) { // :string
 		if (get_magic_quotes_gpc())
 		{
 			$str = stripslashes($str);
 		}
 		return $str;
 	}
-	
+
 	// abstract methods
 	function set_error() {
 		$this->fatal_error('set_error');
@@ -122,25 +122,25 @@ class SIDB {
 	function close() {
 		$this->fatal_error('close');
 	}
-	function quote($str) { // :string 
+	function quote($str) { // :string
 		$this->fatal_error('quote');
 	}
-	function query($sql) { // :boolean 
+	function query($sql) { // :boolean
 		$this->fatal_error('query');
 	}
-	function rows() { // :array 
+	function rows() { // :array
 		$this->fatal_error('rows');
 	}
-	function affected_rows() { // :int 
+	function affected_rows() { // :int
 		$this->fatal_error('affected_rows');
 	}
-	function insert_id() { // :int 
+	function insert_id() { // :int
 		$this->fatal_error('insert_id');
 	}
-	function client_version() { // :string version 
+	function client_version() { // :string version
 		$this->fatal_error('client_version');
 	}
-	function server_version() { // :string version 
+	function server_version() { // :string version
 		$this->fatal_error('server_version');
 	}
 }
@@ -158,7 +158,7 @@ if (version_compare(PHP_VERSION, '5.0.0')>=0) {
 class SIDB_MySQL extends SIDB {
 	var $api	= 'MySQL (Deprecated)';
 	var $mysql	= null; // :Resource id
-	
+
 	function set_error() {
 		$this->error = $this->api.' Error ('.mysql_errno($this->mysql).'): '.mysql_error($this->mysql).' (SQL:'.$this->sql.')';
 	}
@@ -183,7 +183,7 @@ class SIDB_MySQL extends SIDB {
 	}
 	function quote($str) {
 		if (!$this->is_connected) return "''";
-		
+
 		$esc = '';
 		if (function_exists('mysql_real_escape_string')) {
 			$esc = mysql_real_escape_string($str, $this->mysql);
@@ -192,13 +192,13 @@ class SIDB_MySQL extends SIDB {
 			$esc = mysql_escape_string($str);
 		}
 		return "'{$esc}'";
-	} 
-	function query($sql) { // : Resource id or false 
+	}
+	function query($sql) { // : Resource id or false
 		if (!$this->is_connected) return false;
-	
+
 		$this->error = false;
 		$this->sql = $sql;
-	
+
 		$this->result = @mysql_query($sql, $this->mysql);
 		if ($this->result===false) $this->set_error();
 		return !$this->error;
