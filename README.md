@@ -16,6 +16,7 @@ Written in PHP with MySQL and mod_rewrite.
 3. Visit http://doma.in/x/-/ to Lessn a new url and grab
    the bookmarklets (the required database table is created
    automatically the first time you visit Lessn).
+4. Visit http://doma.in/x/ to see all Lessn urls you’ve created.
 
 ### NOTE:
 

@@ -37,6 +37,16 @@ a,button
 	color: #fff;
 	background-color: #333;
 }
+ul {
+	text-align: left;
+	list-style-type: none;
+}
+li {
+	margin: 0 0 10px 0;
+	padding: 3px 5px;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
 input
 {
 	font-family: inherit;
