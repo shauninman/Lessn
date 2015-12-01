@@ -2,6 +2,8 @@
 
 Written in PHP with MySQL and mod_rewrite.
 
+![Lessn](/assets/lessn.png)
+
 ## Installation
 
 1. Open `/lessn/-/config.php` in a plaintext editor and
