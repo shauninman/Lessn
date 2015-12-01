@@ -8,6 +8,7 @@
 
 define( 'LESSN_VERSION', '1.1.2' );
 
+// added in 1.1.2
 define( 'LESSN_ROOT', __DIR__ );
 define( 'LESSN_DOMAIN', preg_replace( '#^www\.#', '', $_SERVER[ 'SERVER_NAME' ] ) );
 define( 'LESSN_URL', str_replace( '-/index.php', '', 'http://' . LESSN_DOMAIN . $_SERVER[ 'PHP_SELF' ] ) );
