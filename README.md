@@ -84,5 +84,12 @@ Updating to 1.1.1 from 1.1
 
 -----------------------------------------------------------
 
+Updating to 1.2.0 from 1.1.1
+
+1. Create a backup of all files.
+2. Replace all files except `/-/config.php` on your server.
+
+-----------------------------------------------------------
+
 Lessn is offered as-is, sans support and without warranty.
 Copyright © 2009 [Shaun Inman](http://shauninman.com/)

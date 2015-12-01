@@ -6,9 +6,9 @@
  * @package Lessn
  */
 
-define('LESSN_VERSION', '1.1.1');
+define('LESSN_VERSION', '1.2.0');
 
-define('LESSN_ROOT', __DIR__);
+define('LESSN_ROOT', __DIR__); // added in 1.2.0
 
 define('LESSN_DOMAIN',  preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']));
 define('LESSN_URL',     str_replace('-/index.php', '', 'http://'.LESSN_DOMAIN.$_SERVER['PHP_SELF']));
