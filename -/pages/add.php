@@ -1,4 +1,11 @@
-<?php require_once(LESSN_ROOT.'/stubs/header.php'); ?>
+<?php
+/**
+ * Add a shortcut page.
+ *
+ * @package Lessn
+ * @version 2019-09-25
+ */
+require_once(LESSN_ROOT.'/stubs/header.php'); ?>
     <form method="get">
         <label for="url"><input type="text" id="url" name="url" placeholder="url" /></label>
         <button>Lessn</button>

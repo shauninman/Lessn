@@ -1,4 +1,11 @@
-<?php include('stubs/header.php'); ?>
+<?php
+/**
+ * Login page.
+ *
+ * @package Lessn
+ * @version 2019-09-25
+ */
+include(LESSN_ROOT.'/stubs/header.php'); ?>
     <form method="post">
         <label for="username"><input type="text" name="username" placeholder="username" id="username" /></label>
         <label>
@@ -9,4 +16,4 @@
     <script>
         document.getElementById('username').focus();
     </script>
-<?php include('stubs/footer.php');
+<?php include(LESSN_ROOT.'/stubs/footer.php');

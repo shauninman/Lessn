@@ -1,4 +1,11 @@
-<?php require_once(LESSN_ROOT.'/stubs/header.php'); ?>
+<?php
+/**
+ * After-page, creating of a shortcut.
+ *
+ * @package Lessn
+ * @version 2019-09-25
+ */
+require_once(LESSN_ROOT.'/stubs/header.php'); ?>
 <p>
     <label for="url"><input type="text"
         id="url"
