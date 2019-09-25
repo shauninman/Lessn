@@ -1,9 +1,12 @@
 <?php
 
-include('config.php');
-include('SIDB423.php');
-include('db.php');
-require_once 'const.php';
+use Lessn\Helper\Helper;
+
+require_once __DIR__ . 'config.php';
+require_once __DIR__ . 'SIDB423.php';
+require_once __DIR__ . 'db.php';
+require_once __DIR__ . 'const.php';
+require_once __DIR__ . 'Helper.php';
 
 // handle login
 if (isset($_POST['username']))
@@ -44,9 +47,10 @@ else if (!isset($_GET['api']))
 if (isset($_GET['url']) && !empty($_GET['url']))
 {
 	$url = $_GET['url'];
-	if (!preg_match('#^[^:]+://#', $url))
+	if (!preg_match('/^[^:]+:\/\//', $url))
 	{
-		$url = 'http://'.$url;
+	    $helper = new Helper();
+		$url = $helper->http().$url;
 	}
 	$checksum 		= sprintf('%u', crc32($url));
 	if ($db->query($db->prepare('SELECT `id` FROM `'.DB_PREFIX.'urls` WHERE `checksum`=? AND `url`=? LIMIT 1', $checksum, $url))) {
@@ -62,7 +66,7 @@ if (isset($_GET['url']) && !empty($_GET['url']))
 
 	if (isset($_GET['tweet']))
 	{
-		$_GET['redirect'] = 'http://twitter.com/?status=%l';
+		$_GET['redirect'] = 'https://twitter.com/?status=%l';
 	}
 
 	if (isset($_GET['redirect']))
