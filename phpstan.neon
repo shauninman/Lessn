@@ -1,0 +1,7 @@
+parameters:
+    ignoreErrors:
+
+    dynamicConstantNames:
+
+    excludes_analyse:
+        - ./-/Medoo.php
