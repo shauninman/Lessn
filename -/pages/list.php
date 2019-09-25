@@ -3,7 +3,7 @@
  * List all existing shortcut.
  *
  * @package Lessn
- * @version 2015-12-01
+ * @version 2019-09-25
  */
 
 require_once(LESSN_ROOT.'/stubs/header.php');
