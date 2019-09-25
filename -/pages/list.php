@@ -6,8 +6,8 @@
  * @version 2015-12-01
  */
 
-require_once LESSN_ROOT . '/stubs/header.php';
-require_once 'LessnListShortcut.php';
+require_once(LESSN_ROOT . '/stubs/header.php');
+require_once( __DIR__.'LessnListShortcut.php');
 
 $list = new LessnListShortcut();
 $list = $list->get_shortcuts();
@@ -35,4 +35,4 @@ $list = $list->get_shortcuts();
 	?>
 </ul>
 <?php
-require_once LESSN_ROOT . '/stubs/footer.php';
+require_once( LESSN_ROOT . '/stubs/footer.php');

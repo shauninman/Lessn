@@ -3,52 +3,52 @@
  * List all existing shortcut.
  *
  * @package Lessn
- * @version 2015-12-01
+ * @version 2019-09-25
  */
 
-require_once LESSN_ROOT . '/config.php';
+require_once( LESSN_ROOT.'/config.php');
 
 /**
  * Class LessnListShortcut
  */
-class LessnListShortcut {
+class LessnListShortcut
+{
 
-	/**
-	 * @var $db
-	 */
-	private $db;
+    /**
+     * @var $db
+     */
+    private $db;
 
-	/**
-	 * LessnListShortcut constructor.
-	 */
-	public function __construct() {
+    /**
+     * LessnListShortcut constructor.
+     */
+    public function __construct()
+    {
+        $this->db = SIDB(DB_NAME, DB_USERNAME, DB_PASSWORD, DB_SERVER);
+        if (!$this->db->is_connected) {
+            die('Could not connect. '.$this->db->error);
+        }
+    }
 
-		$this->db = SIDB( DB_NAME, DB_USERNAME, DB_PASSWORD, DB_SERVER );
-		if ( ! $this->db->is_connected ) {
-			die( 'Could not connect. ' . $this->db->error );
-		}
-	}
+    /**
+     * Get shortcuts, use a ID value for only one item.
+     *
+     * @param bool $id ID if shortcut.
+     *
+     * @param string $order Order of the result.
+     *
+     * @return array $result ID, URL of one or all shortcut.
+     */
+    public function get_shortcuts($id = null, $order = 'DESC')
+    {
+        $sql = ' ORDER BY `id` '.$order;
+        if ($id !== null) {
+            $sql = ' WHERE id='.(int) $id.' LIMIT 1';
+        }
 
-	/**
-	 * Get shortcuts, use a ID value for only one item.
-	 *
-	 * @param bool   $id    ID if shortcut.
-	 *
-	 * @param string $order Order of the result.
-	 *
-	 * @return array $result ID, URL of one or all shortcut.
-	 */
-	public function get_shortcuts( $id = FALSE, $order = 'DESC' ) {
+        $sql = 'SELECT id, url FROM `'.DB_PREFIX.'urls`'.$sql;
+        $this->db->query($sql);
 
-		$sql = ' ORDER BY `id` ' . $order;
-		if ( FALSE !== $id ) {
-			$sql = ' WHERE id=' . (int) $id . ' LIMIT 1';
-		}
-
-		$sql    = 'SELECT id, url FROM `' . DB_PREFIX . 'urls`' . $sql;
-		$query  = $this->db->query( $sql );
-		$result = $this->db->rows();
-
-		return $result;
-	}
+        return $this->db->rows();
+    }
 }
