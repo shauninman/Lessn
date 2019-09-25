@@ -30,8 +30,9 @@ if (isset($_GET['logout'])) {
 if (!isset($_COOKIE[COOKIE_NAME]) || $_COOKIE[COOKIE_NAME] !== COOKIE_VALUE) {
     require_once(__DIR__.'pages/login.php');
     exit();
-} // prolong login for another year, unless this is an API request
-elseif (!isset($_GET['api'])) {
+}
+// prolong login for another year, unless this is an API request
+if (!isset($_GET['api'])) {
     setcookie(COOKIE_NAME, COOKIE_VALUE, NOW + YEAR_IN_SECONDS, '/', COOKIE_DOMAIN);
 }
 
@@ -43,7 +44,7 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
         $url = $helper->http().$url;
     }
     $checksum = sprintf('%u', crc32($url));
-
+    $id = '';
     if ($db->query(
         $db->prepare('SELECT `id` FROM `'.DB_PREFIX.'urls` WHERE `checksum`=? AND `url`=? LIMIT 1', $checksum, $url)
     )) {
