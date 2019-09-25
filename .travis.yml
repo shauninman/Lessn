@@ -21,8 +21,8 @@ matrix:
     - php: 5.6
     - php: nightly
 
-install:
-  - if [[ $PHPSTAN == "true" ]]; find * \( -name '*.php' \) -exec php -l {} \; composer install --no-progress --prefer-source; fi
+before_script:
+  - if [[ $PHPSTAN == "true" ]]; then find . \( -name '*.php' \) -exec php -l {} \; composer install --no-progress --prefer-source; fi
 
 script:
   - vendor/bin/phpcs -n
