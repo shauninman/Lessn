@@ -11,7 +11,7 @@ define('LESSN_VERSION', '1.2.0');
 define('LESSN_ROOT', __DIR__); // added in 1.2.0
 
 define('LESSN_DOMAIN',  preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']));
-define('LESSN_URL',     str_replace('-/index.php', '', 'http://'.LESSN_DOMAIN.$_SERVER['PHP_SELF']));
+define('LESSN_URL',     str_replace('-/index.php', '',  $_SERVER['REQUEST_SCHEME'] . '://' . LESSN_DOMAIN.$_SERVER['PHP_SELF']));
 
 define('COOKIE_NAME',   DB_PREFIX.'auth');
 define('COOKIE_VALUE',  md5(USERNAME.PASSWORD.COOKIE_SALT));
