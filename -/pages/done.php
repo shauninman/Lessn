@@ -1,4 +1,4 @@
-<?php include('stubs/header.php'); ?>
+<?php require_once(__DIR__.'../header.php'); ?>
 <p>
 	<input type="text" id="url" value="<?php echo htmlspecialchars($new_url); ?>" onclick="this.focus();this.select();" readonly="readonly" />
 		<strong><?php echo htmlspecialchars($url); ?></strong>
@@ -12,4 +12,4 @@ input.focus();
 input.select();
 if (navigator.userAgent.match(/(iPod|iPhone|iPad)/) && navigator.userAgent.match(/AppleWebKit/)) input.removeAttribute('readonly');
 </script>
-<?php include('stubs/footer.php');
+<?php require_once(__DIR__.'../footer.php');
