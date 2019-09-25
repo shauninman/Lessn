@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file. This project adheres to [Semantic Versioning](http://semver.org/).
 
+## 1.2.1
+- Add https support (include helper class)
+- Code maintenance
+- Add helpful files, rules for git, phpcs and composer - later in usage.
+
 ## 1.2.0
 - added feature to list shortened URLs when viewing the site root for Lessn, instead of returning a 404
 - added "Updating to 1.2.0 from 1.1.1" to README

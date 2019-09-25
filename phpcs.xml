@@ -1,11 +1,18 @@
 <?xml version="1.0"?>
-<ruleset name="marksimple">
- <description>Rules for my MarkSimple PHP projects</description>
+<ruleset name="Lessn">
+    <description>Rules for my Lessn PHP projects</description>
 
- <file>./src</file>
+    <!-- Annotated ruleset: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+    <!-- Display process. -->
+    <arg value="sp"/>
+    <!-- Use colors on output. -->
+    <arg name="colors"/>
+    <!-- Use only php files. -->
+    <arg name="extensions" value="php"/>
 
- <!-- Code Reviews Rules -->
- <rule ref="Inpsyde"/>
-
+    <!-- Code Reviews Rules -->
+    <rule ref="Inpsyde">
+        <exclude-pattern>./Medoo.php</exclude-pattern>
+    </rule>
 </ruleset>
 
