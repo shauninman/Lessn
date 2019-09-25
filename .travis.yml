@@ -14,8 +14,8 @@ matrix:
       env: PHPSTAN=true
     - php: 7.1
       env: PHPCS=true
-    - php: 7.2
     - php: 7.3
+      env: PHAN=true
     - php: nightly
       env: NIGHLTY=true
   allow_failures:
@@ -23,13 +23,15 @@ matrix:
     - php: nightly
 
 before_script:
-  - find . \( -name '*.php' \) -exec php -l {} \;
+  - if [[ $PHPSTAN == "true" ]]; then composer require --dev phpstan/phpstan; fi
+  - if [[ $PHAN == "true" ]]; then find . -name '*.php' | grep -v test > filelist.txt && composer require --dev phan/phan; fi
   - composer install --no-progress --prefer-source
 
 script:
   - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --config-set installed_paths "../../wp-coding-standards/wpcs/,../../automattic/phpcs-neutron-standard/,../../inpsyde/php-coding-standards/,../../wimg/php-compatibility/"; fi
   - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs -n; fi
-  - if [[ $PHPSTAN == "true" ]]; then composer require --dev phpstan/phpstan && vendor/bin/phpstan analyse . --level=0 --configuration=phpstan.neon; fi
+  - if [[ $PHPSTAN == "true" ]]; then vendor/bin/phpstan analyse . --level=0 --configuration=phpstan.neon; fi
+  - if [[ $PHAN == "true" ]]; then vendor/bin/phan -i -b -f; fi
 
 notifications:
   email: false
