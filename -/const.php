@@ -9,8 +9,7 @@
 
 define('LESSN_VERSION', '1.2.1');
 
-define('LESSN_ROOT', __DIR__); // added in 1.2.0
-
+define('LESSN_ROOT', __DIR__);
 define('LESSN_DOMAIN', preg_replace('#^www\.#', '', $_SERVER['SERVER_NAME']));
 define('LESSN_URL', str_replace('-/index.php', '', $_SERVER['REQUEST_SCHEME'].'://'.LESSN_DOMAIN.$_SERVER['PHP_SELF']));
 
@@ -20,11 +19,11 @@ define('COOKIE_DOMAIN', '.'.LESSN_DOMAIN);
 
 if (!defined('API_SALT')) {
     define('API_SALT', 'L35sm4K35M0U7hSAP1');
-} // added in 1.0.5
+}
 define('API_KEY', md5(USERNAME.PASSWORD.API_SALT));
 
 define('NOW', (new DateTime())->getTimestamp());
 define('MINUTE_IN_SECONDS', 60);
 define('HOUR_IN_SECONDS', 60 * MINUTE_IN_SECONDS);
 define('DAY_IN_SECONDS', 24 * HOUR_IN_SECONDS);
-define('YEAR_IN_SECONDS', 365 * DAY_IN_SECONDS );
+define('YEAR_IN_SECONDS', 365 * DAY_IN_SECONDS);
