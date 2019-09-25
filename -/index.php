@@ -11,7 +11,7 @@ require_once( __DIR__ . 'Helper.php');
 // handle login
 if (isset($_POST['username']))
 {
-	if (md5($_POST['username'].$_POST['password'].COOKIE_SALT) == COOKIE_VALUE)
+	if (md5($_POST['username'].$_POST['password'].COOKIE_SALT) === COOKIE_VALUE)
 	{
 		setcookie(COOKIE_NAME, COOKIE_VALUE, NOW + YEAR_IN_SECONDS, '/', COOKIE_DOMAIN);
 		$_COOKIE[COOKIE_NAME] = COOKIE_VALUE;
@@ -32,7 +32,7 @@ if (isset($_GET['logout']))
 }
 
 // require login
-if (!isset($_COOKIE[COOKIE_NAME]) || $_COOKIE[COOKIE_NAME] != COOKIE_VALUE)
+if (!isset($_COOKIE[COOKIE_NAME]) || $_COOKIE[COOKIE_NAME] !== COOKIE_VALUE)
 {
     require_once( __DIR__. 'pages/login.php');
 	exit();
