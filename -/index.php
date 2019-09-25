@@ -2,11 +2,11 @@
 
 use Lessn\Helper\Helper;
 
-require_once __DIR__ . 'config.php';
-require_once __DIR__ . 'SIDB423.php';
-require_once __DIR__ . 'db.php';
-require_once __DIR__ . 'const.php';
-require_once __DIR__ . 'Helper.php';
+require_once( __DIR__ . 'config.php');
+require_once( __DIR__ . 'SIDB423.php');
+require_once( __DIR__ . 'db.php');
+require_once( __DIR__ . 'const.php');
+require_once( __DIR__ . 'Helper.php');
 
 // handle login
 if (isset($_POST['username']))
@@ -34,7 +34,7 @@ if (isset($_GET['logout']))
 // require login
 if (!isset($_COOKIE[COOKIE_NAME]) || $_COOKIE[COOKIE_NAME] != COOKIE_VALUE)
 {
-	include('pages/login.php');
+    require_once( __DIR__. 'pages/login.php');
 	exit();
 }
 // prolong login for another year, unless this is an API request
@@ -81,9 +81,9 @@ if (isset($_GET['url']) && !empty($_GET['url']))
 		exit();
 	}
 
-	include('pages/done.php');
+	require_once( __DIR__. 'pages/done.php');
 }
 else
 {
-	include('pages/add.php');
+	require_once( __DIR__.'pages/add.php');
 }
