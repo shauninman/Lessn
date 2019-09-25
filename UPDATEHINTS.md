@@ -1,4 +1,8 @@
-# Update Hints
+# Updating Hints
+
+## Updating, to each version since version 1.2.0.
+1. Create a backup of all files.
+2. Replace, upload all files except `/-/config.php` on your server.
 
 ## Updating to 1.2.0 from 1.1.1
 
