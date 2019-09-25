@@ -1,4 +1,4 @@
-<?php require_once(__DIR__.'../stubs/header.php'); ?>
+<?php require_once(LESSN_ROOT.'/stubs/header.php'); ?>
     <form method="get">
         <label for="url"><input type="text" id="url" name="url" placeholder="url" /></label>
         <button>Lessn</button>
@@ -20,4 +20,4 @@
     <script>
         document.getElementById('url').focus();
     </script>
-<?php require_once(__DIR__.'../stubs/footer.php');
+<?php require_once(LESSN_ROOT.'/stubs/footer.php');

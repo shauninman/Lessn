@@ -1,4 +1,4 @@
-<?php require_once(__DIR__.'../stubs/header.php'); ?>
+<?php require_once(LESSN_ROOT.'/stubs/header.php'); ?>
 <p>
     <label for="url"><input type="text"
         id="url"
@@ -18,4 +18,4 @@
         input.removeAttribute('readonly');
     }
 </script>
-    <?php require_once(__DIR__.'../stubs/footer.php');
+    <?php require_once(LESSN_ROOT.'/stubs/footer.php');
