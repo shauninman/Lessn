@@ -4,7 +4,7 @@
 		<strong><?php echo htmlspecialchars($url); ?></strong>
 </p>
 <p>
-	<a href="http://twitter.com/?status=<?php echo urlencode($new_url); ?>">Tweet</a>
+	<a href="https://twitter.com/?status=<?php echo urlencode($new_url); ?>">Tweet</a>
 </p>
 <script>
 var input = document.getElementById('url');
