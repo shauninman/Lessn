@@ -24,14 +24,14 @@ matrix:
 
 before_script:
 #  - if [[ $PHPSTAN == "true" ]]; then composer require --dev phpstan/phpstan; fi
-  - if [[ $PHAN == "true" ]]; then find . -name '*.php' | grep -v test > filelist.txt && composer require --dev phan/phan; fi
+#  - if [[ $PHAN == "true" ]]; then find . -name '*.php' -not -path './vendor*' | grep -v test > filelist.txt; fi
   - composer install --no-progress --prefer-source
 
 script:
 #  - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --config-set installed_paths "../../wp-coding-standards/wpcs/,../../automattic/phpcs-neutron-standard/,../../inpsyde/php-coding-standards/,../../wimg/php-compatibility/"; fi
   - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --standard=./phpcs.dist.xml; fi
 #  - if [[ $PHPSTAN == "true" ]]; then vendor/bin/phpstan analyse . --level=0 --configuration=phpstan.neon; fi
-  - if [[ $PHAN == "true" ]]; then vendor/bin/phan --allow-polyfill-parser -i -b -f filelist.txt; fi
+  - if [[ $PHAN == "true" ]]; then vendor/bin/phan --allow-polyfill-parser -i -b -f ./.phan/filelist.txt; fi
 
 notifications:
   email: false
