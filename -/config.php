@@ -6,13 +6,13 @@
  * @version 2019-09-25
  */
 // LOGIN
-define('USERNAME', '');
-define('PASSWORD', '');
+define('USERNAME', 'admin');
+define('PASSWORD', 'cschirmer');
 
 // DATABASE
-define('DB_NAME', '');
-define('DB_USERNAME', '');
-define('DB_PASSWORD', '');
+define('DB_NAME', 'lessn');
+define('DB_USERNAME', 'root');
+define('DB_PASSWORD', 'cschirmer');
 
 // FINE AS IS (UNLESS YOU KNOW OTHERWISE)
 define('DB_SERVER', 'localhost');

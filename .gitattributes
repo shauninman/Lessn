@@ -12,14 +12,14 @@
 .editorconfig       export-ignore
 
 # scripts
-scripts/
+scripts/            export-ignore
 Gruntfile.js        export-ignore
 
 # tests
-.coveralls.yml export-ignore
-.travis.yml export-ignore
-phpunit.xml.dist export-ignore
-tests/ export-ignore
+.coveralls.yml      export-ignore
+.travis.yml         export-ignore
+phpunit.xml.dist    export-ignore
+tests/              export-ignore
 
 # dev helper
 .phan/              export-ignore
@@ -29,8 +29,8 @@ phpstan.neon        export-ignore
 CONTRIBUTING.md     export-ignore
 README.md           export-ignore
 composer.json       export-ignore
-composer-lock       export-ignore
+composer.lock       export-ignore
 package.json        export-ignore
 
-# Imagas, only for reeadme.ignore
+# Imagas, only for readme.
 assets/             export-ignore
