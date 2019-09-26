@@ -9,7 +9,7 @@
 use Lessn\LessnListShortcut\LessnListShortcut;
 
 require_once(LESSN_ROOT.'/stubs/header.php');
-require_once(__DIR__.'/LessnListShortcut.php');
+require_once(LESSN_ROOT.'/LessnListShortcut.php');
 
 $list = new LessnListShortcut();
 $list = $list->getShortcuts();
