@@ -137,7 +137,7 @@ return [
     // [php7cc (no longer maintained)](https://github.com/sstalle/php7cc)
     // and [php7mar](https://github.com/Alexia/php7mar),
     // which have different backwards compatibility checks.
-    'backward_compatibility_checks' => false,
+    'backward_compatibility_checks' => true,
 
     // If true, check to make sure the return type declared
     // in the doc-block (if any) matches the return type
@@ -282,7 +282,9 @@ return [
 
     // Add any issue types (such as `'PhanUndeclaredMethod'`)
     // to this black-list to inhibit them from being reported.
-    'suppress_issue_types' => [],
+    'suppress_issue_types' => [
+        'PhanUndeclaredFunction',
+    ],
 
     // A regular expression to match files to be excluded
     // from parsing and analysis and will not be read at all.
