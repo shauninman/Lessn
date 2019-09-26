@@ -9,11 +9,13 @@
 
 # IDE
 .idea/              export-ignore
+.editorconfig       export-ignore
 
 # md & config
 CONTRIBUTING.md     export-ignore
 README.md           export-ignore
 composer.json       export-ignore
+composer-lock       export-ignore
 package.json        export-ignore
 
 # scripts
@@ -25,3 +27,13 @@ Gruntfile.js        export-ignore
 .travis.yml export-ignore
 phpunit.xml.dist export-ignore
 tests/ export-ignore
+
+# dev helper
+.phan/              export-ignore
+.travis.yml         export-ignore
+phpcs.dist.xml      export-ignore
+phpstan.neon        export-ignore
+
+
+# Imagas, only for reeadme.ignore
+assets/             export-ignore
