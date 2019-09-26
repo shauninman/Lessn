@@ -10,9 +10,14 @@
     <!-- Use only php files. -->
     <arg name="extensions" value="php"/>
 
+    <file>index.php</file>
+    <file>./-/</file>
+
     <!-- Code Reviews Rules -->
     <rule ref="PSR2">
         <exclude-pattern>./Medoo.php</exclude-pattern>
+        <exclude-pattern>./SIDB5.php</exclude-pattern>
+        <exclude-pattern>./SIDB423.php</exclude-pattern>
     </rule>
 </ruleset>
 
