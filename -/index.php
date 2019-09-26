@@ -2,20 +2,19 @@
 
 use Lessn\Helper\Helper;
 
-require_once(__DIR__.'config.php');
-require_once(__DIR__.'SIDB423.php');
-require_once(__DIR__.'db.php');
-require_once(__DIR__.'const.php');
-require_once(__DIR__.'Helper.php');
+require_once(__DIR__.'/config.php');
+require_once(__DIR__.'/SIDB423.php');
+require_once(__DIR__.'/db.php');
+require_once(__DIR__.'/const.php');
+require_once(LESSN_ROOT.'/Helper.php');
 
-// handle login
+// Handle login or Api login via key.
 if (isset($_POST['username'])) {
     if (md5($_POST['username'].$_POST['password'].COOKIE_SALT) === COOKIE_VALUE) {
         setcookie(COOKIE_NAME, COOKIE_VALUE, NOW + YEAR_IN_SECONDS, '/', COOKIE_DOMAIN);
         $_COOKIE[COOKIE_NAME] = COOKIE_VALUE;
     }
-} // API login
-elseif (isset($_GET['api']) && $_GET['api'] == API_KEY) {
+} elseif (isset($_GET['api']) && $_GET['api'] === API_KEY) {
     $_COOKIE[COOKIE_NAME] = COOKIE_VALUE;
 }
 
@@ -28,7 +27,7 @@ if (isset($_GET['logout'])) {
 
 // require login
 if (!isset($_COOKIE[COOKIE_NAME]) || $_COOKIE[COOKIE_NAME] !== COOKIE_VALUE) {
-    require_once(__DIR__.'pages/login.php');
+    require_once(__DIR__.'/pages/login.php');
     exit();
 }
 // prolong login for another year, unless this is an API request
@@ -71,7 +70,7 @@ if (isset($_GET['url']) && !empty($_GET['url'])) {
         exit();
     }
 
-    require_once(__DIR__.'pages/done.php');
+    require_once(__DIR__.'/pages/done.php');
 } else {
-    require_once(__DIR__.'pages/add.php');
+    require_once(__DIR__.'/pages/add.php');
 }

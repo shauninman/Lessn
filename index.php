@@ -1,5 +1,5 @@
 <?php
-
+error_reporting(E_ALL);
 include('-/config.php');
 include('-/SIDB423.php');
 include('-/db.php');
@@ -20,4 +20,4 @@ if (isset($_GET['token'])) {
 }
 
 // no redirect
-require_once './-/pages/list.php';
+require_once(__DIR__.'/-/pages/list.php');
