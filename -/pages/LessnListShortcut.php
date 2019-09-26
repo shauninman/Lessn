@@ -5,6 +5,7 @@
  * @package Lessn
  * @version 2019-09-26
  */
+namespace Lessn\LessnListShortcut;
 
 require_once(LESSN_ROOT.'/config.php');
 
