@@ -43,7 +43,7 @@ return [
     // Note that the **only** effect of choosing `'5.6'` is to infer that functions removed in php 7.0 exist.
     // (See `backward_compatibility_checks` for additional options)
     // TODO: Choose a target_php_version for this project, or leave as null and remove this comment
-    'target_php_version' => NULL,
+    'target_php_version' => '5.6',
 
     // If enabled, missing properties will be created when
     // they are first seen. If false, we'll report an
