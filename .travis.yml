@@ -29,7 +29,7 @@ before_script:
 
 script:
   - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --config-set installed_paths "../../wp-coding-standards/wpcs/,../../automattic/phpcs-neutron-standard/,../../inpsyde/php-coding-standards/,../../wimg/php-compatibility/"; fi
-  - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs -n; fi
+  - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --standard="PSR2" *.php ./-/*php; fi
 #  - if [[ $PHPSTAN == "true" ]]; then vendor/bin/phpstan analyse . --level=0 --configuration=phpstan.neon; fi
   - if [[ $PHAN == "true" ]]; then vendor/bin/phan --allow-polyfill-parser -i -b -f filelist.txt; fi
 

@@ -11,7 +11,7 @@
     <arg name="extensions" value="php"/>
 
     <!-- Code Reviews Rules -->
-    <rule ref="Inpsyde">
+    <rule ref="PSR2">
         <exclude-pattern>./Medoo.php</exclude-pattern>
     </rule>
 </ruleset>
