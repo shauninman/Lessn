@@ -22,7 +22,7 @@ matrix:
     - php: nightly
 
 before_script:
-  - if [[ "$(phpenv version-name)" != 7.0 ]]; composer install --no-progress --prefer-source; fi
+  - if [[ "$(phpenv version-name)" != 7.0 ]]; then composer install --no-progress --prefer-source; fi
 
 script:
   - if [[ $PHPCS == "true" ]]; then vendor/bin/phpcs --standard=./phpcs.dist.xml; fi
