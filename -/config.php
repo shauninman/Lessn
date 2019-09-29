@@ -7,12 +7,12 @@
  */
 // LOGIN
 define('USERNAME', 'admin');
-define('PASSWORD', 'cschirmer');
+define('PASSWORD', '');
 
 // DATABASE
 define('DB_NAME', 'lessn');
 define('DB_USERNAME', 'root');
-define('DB_PASSWORD', 'cschirmer');
+define('DB_PASSWORD', '');
 
 // FINE AS IS (UNLESS YOU KNOW OTHERWISE)
 define('DB_SERVER', 'localhost');
