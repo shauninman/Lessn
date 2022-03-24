@@ -35,8 +35,8 @@ jobs:
       continue-on-error: true
       run: ./vendor/bin/phpcs
 
-    - name: Run QA Scripts from composer.json
-      run: composer qa
+    - name: Run CodeSniffer Scripts from composer.json
+      run: composer cs
 
     - name: PHP Syntax Checker (Lint)
       uses: StephaneBour/actions-php-lint@7.4
