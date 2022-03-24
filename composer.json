@@ -22,5 +22,16 @@
         "inpsyde/php-coding-standards": "^1@dev",
         "squizlabs/php_codesniffer": "^3",
         "phan/phan": "^5@dev"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "optimize-autoloader": true
+    },
+        "scripts": {
+        "cs": "@php ./vendor/squizlabs/php_codesniffer/bin/phpcs",
+        "csfix": "@php ./vendor/bin/phpcbf",
+        "pu": "@php ./vendor/bin/phpunit",
+        "qa": ["@cs", "@pu"]
     }
 }
