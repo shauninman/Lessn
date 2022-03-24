@@ -1,5 +1,7 @@
 # Lessn is an extremely simple, personal URL shortener
 
+[![CI](https://github.com/bueltge/Lessn/workflows/CI/badge.svg)](https://github.com/bueltge/Lessn/actions)
+
 Written in PHP with MySQL and mod_rewrite. Maintained and enhanced in this repository by me.
 
 ![Lessn](/assets/lessn.png)
