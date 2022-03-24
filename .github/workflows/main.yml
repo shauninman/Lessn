@@ -31,14 +31,15 @@ jobs:
     - name: Install dependencies
       run: composer install -q -n -a --no-progress --prefer-dist
 
-    - name: Check code styles
+    - name: PHP Code Style Checker
       continue-on-error: true
       run: ./vendor/bin/phpcs
 
-    - name: Run CodeSniffer Scripts from composer.json
-      run: composer cs
-
-    - name: PHP Syntax Checker (Lint)
+    - name: PHP 7.4 Syntax Checker (Lint)
       uses: StephaneBour/actions-php-lint@7.4
+      with:
+        dir: '.'
+    - name: PHP 8.1 Syntax Checker (Lint)
+      uses: StephaneBour/actions-php-lint@8.1
       with:
         dir: '.'
