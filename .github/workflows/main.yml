@@ -19,7 +19,7 @@ jobs:
       with:
         php-version: ${{ matrix.php-versions }}
 
-    - name: Check syntax error in sources
+    - name: PHP ${{ matrix.php-versions }} Syntax Check error in sources
       run: find . ./tests/ -type f -name '*.php' -print0 | xargs -0 -L 1 -P 4 -- php -l
 
     - name: Clear cache of Composer
@@ -34,12 +34,3 @@ jobs:
     - name: PHP Code Style Checker
       continue-on-error: true
       run: ./vendor/bin/phpcs
-
-    - name: PHP 7.4 Syntax Checker (Lint)
-      uses: StephaneBour/actions-php-lint@7.4
-      with:
-        dir: '.'
-    - name: PHP 8.1 Syntax Checker (Lint)
-      uses: StephaneBour/actions-php-lint@8.1
-      with:
-        dir: '.'
