@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<ruleset name="Lessn">
+    <description>Rules for my Lessn PHP projects</description>
+
+    <!-- Annotated ruleset: https://github.com/squizlabs/PHP_CodeSniffer/wiki/Annotated-ruleset.xml -->
+    <!-- Display process. -->
+    <arg value="sp"/>
+    <!-- Use colors on output. -->
+    <arg name="colors"/>
+    <!-- Use only php files. -->
+    <arg name="extensions" value="php"/>
+
+    <file>index.php</file>
+    <file>./-/</file>
+
+    <!-- Code Reviews Rules -->
+    <rule ref="PSR2">
+        <exclude-pattern>./Medoo.php</exclude-pattern>
+        <exclude-pattern>./SIDB5.php</exclude-pattern>
+        <exclude-pattern>./SIDB423.php</exclude-pattern>
+    </rule>
+</ruleset>
+

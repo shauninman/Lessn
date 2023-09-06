@@ -5,14 +5,14 @@
 class SIDB_PDO_MySQL extends SIDB {
 	var $api = 'PDO/MySQL';
 	var $pdo = null; // :PDO
-	
+
 	function set_error() {
 		list($e, $errno, $error) = $this->pdo->errorInfo();
 		$this->error = "{$this->api} Error ({$errno}): {$error}".' (SQL:'.$this->sql.')';
 	}
 	function connect($database='', $username='', $password='', $server='localhost') {
 		$server = $this->parse_server($server);
-		
+
 		$dsn = 'mysql:';
 		if ($server['socket']) {
 			$dsn .= "unix_socket={$server['socket']};";
@@ -22,7 +22,7 @@ class SIDB_PDO_MySQL extends SIDB {
 			if ($server['port']) $dsn .= "port={$server['port']};";
 		}
 		$dsn .= "dbname={$database};";
-		
+
 		try {
 			$this->pdo = new PDO($dsn, $username, $password);
 			$this->is_connected = true;
@@ -42,7 +42,7 @@ class SIDB_PDO_MySQL extends SIDB {
 	}
 	function query($sql) {
 		if (!$this->is_connected) return false;
-		
+
 		// See http://br2.php.net/manual/en/pdo.query.php (paragraph
 		// above the first NOTE re: PDOStatement::closeCursor())
 		if ($this->result) {
@@ -55,7 +55,7 @@ class SIDB_PDO_MySQL extends SIDB {
 
 		$this->result = $this->pdo->query($sql);
 		if ($this->result===false) $this->set_error();
-		
+
 		return !$this->error;
 	}
 	function rows() {
@@ -98,13 +98,13 @@ class SIDB_PDO_MySQL extends SIDB {
 class SIDB_MySQLi extends SIDB {
 	var $api 	= 'MySQL Improved';
 	var $mysqli	= null; // :mysqli
-	
+
 	function set_error() {
 		$this->error = $this->api.' Error ('.$this->mysqli->errno.'): '.$this->mysqli->error.' (SQL:'.$this->sql.')';
 	}
 	function connect($database='', $username='', $password='', $server='localhost') {
 		$server = $this->parse_server($server);
-	
+
 		if (($this->mysqli = @mysqli_connect($server['host'], $username, $password, $database, $server['port'], $server['socket']))!==false) {
 			$this->is_connected = true;
 		}
@@ -114,7 +114,7 @@ class SIDB_MySQLi extends SIDB {
 	}
 	function close() {
 		if (!$this->is_connected) return;
-	
+
 		$this->mysqli->close();
 		$this->mysqli = null;
 		$this->is_connected = false;
@@ -126,13 +126,13 @@ class SIDB_MySQLi extends SIDB {
 	}
 	function query($sql) {
 		if (!$this->is_connected) return false;
-	
+
 		$this->error = false;
 		$this->sql = $sql;
-	
+
 		$this->result = $this->mysqli->query($sql);
 		if ($this->result===false) $this->set_error();
-		
+
 		return !$this->error;
 	}
 	function rows() {
